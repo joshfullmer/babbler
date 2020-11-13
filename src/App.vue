@@ -1,12 +1,28 @@
 <template>
   <teleport to="head">
-    <title>{{ title }}</title>
+    <title>{{ pageTitle }}</title>
   </teleport>
-  {{ title }}
+
+  <div class="h-full flex justify-center items-center">
+    {{ pageTitle }}
+  </div>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
+<script lang="ts">
+import { defineComponent, onMounted } from 'vue'
 
-export const title = ref('Babbler: A twitter clone')
+import { useAppState } from './state'
+
+export default defineComponent({
+  setup () {
+    const { pageTitle, setPageTitle } = useAppState()
+
+    onMounted(() => {
+      setPageTitle('Babbler: A twitter clone')
+    })
+
+    return { pageTitle }
+  }
+})
+
 </script>
