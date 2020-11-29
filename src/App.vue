@@ -1,25 +1,23 @@
 <template>
-  <teleport to="head">
-    <title>{{ pageTitle }}</title>
-  </teleport>
+  <PageTitle />
 
-  <div class="h-full flex justify-center items-center">
+  <div class="h-full flex flex-col justify-center items-center">
     {{ pageTitle }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
+import { defineComponent } from 'vue'
 
-import { useAppState } from './state'
+import PageTitle from './components/PageTitle.vue'
+
+import { useAppState } from './state/app.state'
 
 export default defineComponent({
-  setup () {
-    const { pageTitle, setPageTitle } = useAppState()
+  components: { PageTitle },
 
-    onMounted(() => {
-      setPageTitle('Babbler: A twitter clone')
-    })
+  setup () {
+    const { pageTitle } = useAppState()
 
     return { pageTitle }
   }
